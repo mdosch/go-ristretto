@@ -87,6 +87,9 @@ and [Mike Hamburg](https://www.shiftleft.org).
 Changes
 -------
 
+### 1.2.1 (unreleased)
+- Add Scalar.SetUint64().
+
 ### 1.2.0 (17-02-2021)
 
 - Add Point.Double().  See issue #21.

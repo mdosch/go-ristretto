@@ -234,6 +234,18 @@ func TestScDerive(t *testing.T) {
 	}
 }
 
+func TestScSetUint64(t *testing.T) {
+	var s1, s2 ristretto.Scalar
+	var bi big.Int
+	v := uint64(0x0102030405060708)
+	bi.SetUint64(v)
+	s1.SetUint64(v)
+	s2.SetBigInt(&bi)
+	if !s1.Equals(&s2) {
+		t.Fatal()
+	}
+}
+
 func TestIssue14(t *testing.T) {
 	var buf [32]byte
 	var s ristretto.Scalar

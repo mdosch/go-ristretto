@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"crypto/sha512"
 	"encoding/base64"
+	"encoding/binary"
 	"fmt"
 
 	// Required for FieldElement.[Set]BigInt().  Obviously not used for actual
@@ -190,6 +191,13 @@ func (s *Scalar) SetBigInt(x *big.Int) *Scalar {
 	for i := 0; i < len(buf) && i < 32; i++ {
 		rBuf[i] = buf[len(buf)-i-1]
 	}
+	return s.SetBytes(&rBuf)
+}
+
+// Sets s to x.
+func (s *Scalar) SetUint64(x uint64) *Scalar {
+	var rBuf [32]byte
+	binary.LittleEndian.PutUint64(rBuf[:], x)
 	return s.SetBytes(&rBuf)
 }
 
