@@ -150,6 +150,22 @@ func TestBasePointMultiples(t *testing.T) {
 	}
 }
 
+func TestConditionalSet(t *testing.T) {
+	var p1, p2 ristretto.Point
+	for i := 0; i < 1000; i++ {
+		p1.Rand()
+		p2.Rand()
+		p1.ConditionalSet(&p2, 0)
+		if p1.Equals(&p2) {
+			t.Fatal()
+		}
+		p1.ConditionalSet(&p2, 1)
+		if !p1.Equals(&p2) {
+			t.Fatal()
+		}
+	}
+}
+
 func testLizardVector(t *testing.T, in, out string) {
 	var p ristretto.Point
 	var inBuf [16]byte

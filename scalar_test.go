@@ -245,6 +245,21 @@ func TestScSetUint64(t *testing.T) {
 		t.Fatal()
 	}
 }
+func TestScConditionalSet(t *testing.T) {
+	var s1, s2 ristretto.Scalar
+	for i := 0; i < 1000; i++ {
+		s1.Rand()
+		s2.Rand()
+		s1.ConditionalSet(&s2, 0)
+		if s1.Equals(&s2) {
+			t.Fatal()
+		}
+		s1.ConditionalSet(&s2, 1)
+		if !s1.Equals(&s2) {
+			t.Fatal()
+		}
+	}
+}
 
 func TestIssue14(t *testing.T) {
 	var buf [32]byte
